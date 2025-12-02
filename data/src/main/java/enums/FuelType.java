@@ -9,7 +9,8 @@ public enum FuelType {
     DIESEL("DIESEL"),
     PETROL("PETROL"),
     HYBRID("HYBRID"),
-    PLUGIN("PLUGIN");
+    PLUGIN("PLUGIN"),
+    ELECTRIC("ELECTRIC");
 
     public final String Type;
 }
