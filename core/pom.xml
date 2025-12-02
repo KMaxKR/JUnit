@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>strc.data</groupId>
         <artifactId>JUnit</artifactId>
@@ -18,15 +20,34 @@
     </properties>
 
     <dependencies>
+        <!-- Spring Boot Web -->
         <dependency>
-            <groupId>strc.data</groupId>
-            <artifactId>utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Internal modules -->
         <dependency>
             <groupId>strc.data</groupId>
             <artifactId>data</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>strc.data</groupId>
+            <artifactId>utils</artifactId>
+        </dependency>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
