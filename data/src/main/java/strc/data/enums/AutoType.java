@@ -1,4 +1,4 @@
-package enums;
+package strc.data.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

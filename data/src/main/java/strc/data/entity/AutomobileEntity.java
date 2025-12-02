@@ -1,14 +1,12 @@
-package entity;
+package strc.data.entity;
 
-import enums.AutoType;
-import enums.FuelType;
+import strc.data.enums.AutoType;
+import strc.data.enums.FuelType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @Builder
@@ -32,7 +30,7 @@ public class AutomobileEntity {
     private AutoType type;
 
     @Column(name = "year")
-    private Date year;
+    private int year;
 
     @Column(name = "engineVolume")
     private Double engineVolume;
@@ -46,4 +44,12 @@ public class AutomobileEntity {
     @Column(name = "fuelType")
     @Enumerated(value = EnumType.STRING)
     private FuelType fuelType;
+
+    public String getAutoSpecs(){
+        String s = "Name: " + name + "\nModel: " + model
+                + "\nType: " + type.getType() + "\nYear: " + year
+                + "\nEngineVolume: " + engineVolume + "\nMaxSpeed: " + maxSpeed
+                +"\nNumSeats: " + numSeats + "\nFuelType: " + fuelType.getType();
+        return s;
+    }
 }
