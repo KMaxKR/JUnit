@@ -31,10 +31,6 @@
             <groupId>strc.data</groupId>
             <artifactId>data</artifactId>
         </dependency>
-        <dependency>
-            <groupId>strc.data</groupId>
-            <artifactId>utils</artifactId>
-        </dependency>
 
         <!-- Servlet API -->
         <dependency>
