@@ -49,7 +49,7 @@ public class AutomobileService {
                     .filter(e -> e.getYear() <= automobileDTO.getMaxYear())
                     .toList();
         }
-        if (automobileDTO.getEngineVolume() >= 0){
+        if (automobileDTO.getEngineVolume() != null){
             result = result.stream()
                     .filter(e -> e.getEngineVolume() >= automobileDTO.getEngineVolume())
                     .toList();
@@ -70,6 +70,21 @@ public class AutomobileService {
                     .toList();
         }
         return result;
+    }
+    
+    public AutomobileEntity saveAutomobile(RequestAutomobileDTO automobileDTO){
+        AutomobileEntity automobile = AutomobileEntity.builder()
+                .name(automobileDTO.getName())
+                .model(automobileDTO.getModel())
+                .type(automobileDTO.getType())
+                .year(automobileDTO.getMinYear())
+                .engineVolume(automobileDTO.getEngineVolume())
+                .maxSpeed(automobileDTO.getMaxSpeed())
+                .numSeats(automobileDTO.getNumSeats())
+                .fuelType(automobileDTO.getFuelType())
+                .build();
+        automobileRepository.save(automobile);
+        return automobile;
     }
 
 

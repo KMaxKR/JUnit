@@ -32,16 +32,16 @@ public class AutomobileEntity {
     @Column(name = "year")
     private int year;
 
-    @Column(name = "engineVolume")
+    @Column(name = "engine_volume")
     private Double engineVolume;
 
-    @Column(name = "maxSpeed")
+    @Column(name = "max_speed")
     private Double maxSpeed;
 
-    @Column(name = "numSeats")
+    @Column(name = "num_seats")
     private int numSeats;
 
-    @Column(name = "fuelType")
+    @Column(name = "fuel_type")
     @Enumerated(value = EnumType.STRING)
     private FuelType fuelType;
 
