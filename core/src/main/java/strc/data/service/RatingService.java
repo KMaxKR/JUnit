@@ -20,18 +20,18 @@ public class RatingService {
         return ratingRepository.findAll();
     }
 
-    public void saveRating(AutomobileEntity automobile){
-        ratingRepository.save(AutomobileRatingEntity
+    public AutomobileRatingEntity saveRating(AutomobileEntity automobile){
+        return ratingRepository.save(AutomobileRatingEntity
                 .builder()
                         .carID(automobile.getId())
-                        .rating(0)
-                        .isValid(0)
+                        .rating(calcRating(automobile))
+                        .isValid(calcIsValid(automobile))
                 .build());
     }
 
     private double calcRating(AutomobileEntity automobile){
-        double ageScore = Math.max(1, 10 - (2025 - automobile.getYear()) * 0.5);   // mașinile mai noi = scor mai mare
-        double engineScore = Math.min(10, automobile.getEngineVolume()) * 2;        // motor mare = scor mai mare
+        double ageScore = Math.max(1, 10 - (2026 - automobile.getYear()) * 0.5);
+        double engineScore = Math.min(7, automobile.getEngineVolume()) * 2;
         double speedScore = Math.min(10, automobile.getMaxSpeed()) / 30;
         return (ageScore * 0.4) + (engineScore * 0.3) + (speedScore * 0.3);
     }
@@ -39,18 +39,18 @@ public class RatingService {
     private double calcIsValid(AutomobileEntity automobile){
         double fuelScore =
                 switch (automobile.getFuelType()) {
-                    case ELECTRIC -> 10;
+                    case ELECTRIC -> 9.4;
                     case PLUGIN -> 9;
-                    case HYBRID -> 8;
-                    case PETROL -> 6.5;
-                    case DIESEL -> 5;
+                    case HYBRID -> 8.5;
+                    case PETROL -> 8.2;
+                    case DIESEL -> 8;
                 };
 
-        double seatsScore = Math.min(10, automobile.getNumSeats()) * 1.2;   // 5 locuri = 6.0
+        double seatsScore = Math.min(7, automobile.getNumSeats()) * 1.2;
         double engineScore = (automobile.getEngineVolume() != null && automobile.getEngineVolume() > 0) ? 8 : 1;
 
         double raw = (fuelScore * 0.5) + (seatsScore * 0.2) + (engineScore * 0.3);
 
-        return Math.max(1, Math.min(10, raw)); // clamp la [1,10]
+        return Math.max(1, Math.min(10, raw));
     }
 }

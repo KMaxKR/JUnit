@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "auto_rating_db")
 public class AutomobileRatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
