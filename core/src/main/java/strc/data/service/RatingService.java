@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import strc.data.entity.AutomobileEntity;
 import strc.data.entity.AutomobileRatingEntity;
+import strc.data.enums.FuelType;
 import strc.data.repository.AutomobileRatingRepository;
 
 import java.util.List;
@@ -29,14 +30,14 @@ public class RatingService {
                 .build());
     }
 
-    private double calcRating(AutomobileEntity automobile){
+    public double calcRating(AutomobileEntity automobile){
         double ageScore = Math.max(1, 10 - (2026 - automobile.getYear()) * 0.5);
         double engineScore = Math.min(7, automobile.getEngineVolume()) * 2;
         double speedScore = Math.min(10, automobile.getMaxSpeed()) / 30;
         return (ageScore * 0.4) + (engineScore * 0.3) + (speedScore * 0.3);
     }
 
-    private double calcIsValid(AutomobileEntity automobile){
+    public double calcIsValid(AutomobileEntity automobile){
         double fuelScore =
                 switch (automobile.getFuelType()) {
                     case ELECTRIC -> 9.4;
@@ -47,7 +48,12 @@ public class RatingService {
                 };
 
         double seatsScore = Math.min(7, automobile.getNumSeats()) * 1.2;
-        double engineScore = (automobile.getEngineVolume() != null && automobile.getEngineVolume() > 0) ? 8 : 1;
+        double engineScore = 0;
+        if (automobile.getFuelType().equals(FuelType.ELECTRIC)){
+            engineScore = 9.4;
+        }else {
+            engineScore = (automobile.getEngineVolume() != null && automobile.getEngineVolume() > 0) ? 8 : 1;
+        }
 
         double raw = (fuelScore * 0.5) + (seatsScore * 0.2) + (engineScore * 0.3);
 
